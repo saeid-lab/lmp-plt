@@ -43,21 +43,18 @@ dens = Data[:,5:6]
 
 toteng=Data[:,6:7]
 
-xlo  = Data[:,16:17]
-xhi  = Data[:,17:18]
-ylo  = Data[:,18:19]
-yhi  = Data[:,19:20]
-zlo  = Data[:,20:21]
-zhi  = Data[:,21:22]
+xdim = Data[:,16:17]
+ydim = Data[:,17:18]
+zdim = Data[:,18:19]
 
-ptot = Data[:,22:23]
 
-pxx  = Data[:,23:24]
-pyy  = Data[:,24:25]
-pzz  = Data[:,25:26]
-pxy  = Data[:,26:27]
-pxz  = Data[:,27:28]
-pyz  = Data[:,28:29]
+ptot = Data[:,19:20]
+pxx  = Data[:,20:21]
+pyy  = Data[:,21:22]
+pzz  = Data[:,22:23]
+pxy  = Data[:,23:24]
+pxz  = Data[:,24:25]
+pyz  = Data[:,25:26]
 # ----------------- matplotlib -----------------
 
 fig, ax = plt.subplots(nrows=3,ncols=2, figsize=(20,10))
@@ -115,49 +112,11 @@ ax[2,1].legend()
 
 # ----------------- matplotlib -----------------
 
-fig, ax = plt.subplots(nrows=3,ncols=2, figsize=(20,10))
-fig.canvas.set_window_title('Size of the Box')
-
-ax[0,0].plot(time,xlo, label='Xlo')
-ax[0,0].set_xlabel('Time (ns)')
-ax[0,0].set_ylabel('X low (A)')
-ax[0,0].legend()
-
-ax[0,1].plot(time,xhi, label='Xhi')
-ax[0,1].set_xlabel('Time (ns)')
-ax[0,1].set_ylabel('X High (A)')
-ax[0,1].legend()
-
-
-ax[1,0].plot(time,ylo, label='Ylo')
-ax[1,0].set_xlabel('Time (ns)')
-ax[1,0].set_ylabel('Y low (A)')
-ax[1,0].legend()
-
-ax[1,1].plot(time,yhi, label='Yhi')
-ax[1,1].set_xlabel('Time (ns)')
-ax[1,1].set_ylabel('Y High (A)')
-ax[1,1].legend()
-
-
-ax[2,0].plot(time,zlo, label='Zlo')
-ax[2,0].set_xlabel('Time (ns)')
-ax[2,0].set_ylabel('Z low (A)')
-ax[2,0].legend()
-
-ax[2,1].plot(time,zhi, label='Zhi')
-ax[2,1].set_xlabel('Time (ns)')
-ax[2,1].set_ylabel('Z High (A)')
-ax[2,1].legend()
-
-
-# ----------------- matplotlib -----------------
-
 
 fig, ax = plt.subplots(nrows=3,ncols=2, figsize=(20,10))
 fig.canvas.set_window_title('Pressure')
 
-ax[0,0].plot(time,pxx, label='pxx')
+ax[0,0].scatter(time,pxx, label='pxx')
 ax[0,0].axhline(y=np.average(pxx), color='r')
 ax[0,0].text(0.4, 0.8,size=12, color='w', transform=ax[0,0].transAxes, backgroundcolor='tab:orange', \
              s='average={}\nstd={}'.format(np.round(np.average(pxx), decimals=3), np.round(np.std(pxx), decimals=3)))
@@ -213,18 +172,18 @@ ax[2,1].legend()
 fig, ax = plt.subplots(nrows=3,ncols=1, figsize=(20,10))
 fig.canvas.set_window_title('Size of the Box')
 
-ax[0].plot(time, (xhi-xlo), label='X Dimension')
+ax[0].plot(time, xdim, label='X Dimension')
 ax[0].set_xlabel('Time (ns)')
 ax[0].set_ylabel('Size of the Box (A)')
 ax[0].legend()
 
-ax[1].plot(time,(yhi-ylo), label='Y Dimension')
+ax[1].plot(time, ydim, label='Y Dimension')
 ax[1].set_xlabel('Time (ns)')
 ax[1].set_ylabel('Size of the Box (A)')
 ax[1].legend()
 
 
-ax[2].plot(time,(zhi-zlo), label='Z Dimension')
+ax[2].plot(time,zdim, label='Z Dimension')
 ax[2].set_xlabel('Time (ns)')
 ax[2].set_ylabel('Size of the Box (A)')
 ax[2].legend()
